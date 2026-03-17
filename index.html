@@ -145,7 +145,7 @@ gap:10px;
 <button onclick="exportAll()">Export All</button>
 <button onclick="importAll()">Import All</button>
 <input type="file" id="importFile" style="display:none" accept=".json" onchange="handleImport(event)">
-</div>
+</div><button onclick="deleteAllData()">Tout supprimer</button>
 </div>
 <script>
 const today=new Date();
@@ -480,6 +480,13 @@ function handleImport(event) {
     }
   };
   reader.readAsText(file);
+}
+function deleteAllData() {
+  if(confirm("Voulez-vous vraiment tout supprimer ? Toutes vos données seront perdues !")) {
+    localStorage.clear(); // supprime toutes les données enregistrées
+    alert("Toutes les données ont été supprimées !");
+    location.reload(); // recharge la page pour tout réinitialiser
+  }
 }
 </script>
 </body>
