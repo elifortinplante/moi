@@ -3,63 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Accueil Combinaison Apps</title>
+<title>12 Carrés Apps - 2 colonnes</title>
 <style>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  display: flex;
-  align-items: center;       /* centre horizontalement */
-  justify-content: center;   /* centre verticalement */
-  min-height: 100vh;
   background: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 30px;
+}
+
+h1 {
+  text-align: center;
 }
 
 #home {
   display: flex;
-  flex-direction: column;    /* texte au-dessus, images en dessous */
-  align-items: center;       /* centre horizontalement le contenu */
-  gap: 20px;                 /* espace entre le texte et les images */
-}
-
-#home div {
-  display: flex;
-  justify-content: center;   /* centre horizontalement */
-  gap: 25px;                 /* espace entre les images */
+  flex-direction: column;
   align-items: center;
+  gap: 20px;
 }
 
-#home img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;         
-  margin: 5px;
-  border-radius: 15px;       /* coins arrondis mais carré */
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+#grid {
+  display: grid;
+  grid-template-columns: repeat(2, 120px); /* 2 colonnes */
+  gap: 20px; /* espace entre les carrés */
+  justify-content: center;
+}
+
+.square {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px; /* coins arrondis */
+  overflow: hidden;
   cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
   transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#home img:hover {
+.square img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* l'image remplit le carré */
+}
+
+.square:hover {
   transform: scale(1.1);
+}
+
+.app {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 </style>
 </head>
 <body>
+
 <div id="home">
   <h1>Bienvenue</h1>
-  <div>
-    <img src="https://i.postimg.cc/65w5QCDb/IMG-0067.jpg" 
-         width="100" height="100" 
-         onclick="showApp1()" alt="App 1">
-    <img src="https://i.postimg.cc/brP8sjFH/IMG-0069.jpg" 
-         width="100" height="100" 
-         onclick="showApp2()" alt="App 2">
+  <div id="grid">
+    <!-- 12 carrés avec images, sans texte -->
+    <div class="square" onclick="showApp(1)"><img src="https://i.postimg.cc/65w5QCDb/IMG-0067.jpg" alt="App 1"></div>
+    <div class="square" onclick="showApp(2)"><img src="https://i.postimg.cc/8cgWgQd8/IMG-0069.jpg" alt="App 2"></div>
+    <div class="square" onclick="showApp(3)"><img src="https://i.postimg.cc/Zqx7sS1s/IMG-0213.jpg" alt="App 3"></div>
+    <div class="square" onclick="showApp(4)"><img src="URL_IMAGE_4" alt="App 4"></div>
+    <div class="square" onclick="showApp(5)"><img src="URL_IMAGE_5" alt="App 5"></div>
+    <div class="square" onclick="showApp(6)"><img src="URL_IMAGE_6" alt="App 6"></div>
+    <div class="square" onclick="showApp(7)"><img src="URL_IMAGE_7" alt="App 7"></div>
+    <div class="square" onclick="showApp(8)"><img src="URL_IMAGE_8" alt="App 8"></div>
+    <div class="square" onclick="showApp(9)"><img src="URL_IMAGE_9" alt="App 9"></div>
+    <div class="square" onclick="showApp(10)"><img src="URL_IMAGE_10" alt="App 10"></div>
+    <div class="square" onclick="showApp(11)"><img src="URL_IMAGE_11" alt="App 11"></div>
+    <div class="square" onclick="showApp(12)"><img src="URL_IMAGE_12" alt="App 12"></div>
   </div>
 </div>
 
-<div id="app1" style="display:none;">
- <!DOCTYPE html>
+<!-- Conteneurs apps -->
+<div id="app1" class="app"><button onclick="returnHome()">Retour</button> 
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -490,10 +521,9 @@ function deleteAllData() {
 }
 </script>
 </body>
-</html>
-
-<div id="app2" style="display:none;">
-  <!DOCTYPE html>
+</html> 
+</div>
+<div id="app2" class="app"><button onclick="returnHome()">Retour</button><!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -1035,23 +1065,142 @@ goHome();
 </script>
 </body>
 </html>
-
 </div>
+<div id="app3" class="app"><button onclick="returnHome()">Retour</button><!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liste à cocher</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  button { cursor: pointer; padding: 5px 10px; margin-bottom: 10px; }
+  #newTaskInput { display: none; margin-bottom: 10px; width: 100%; padding: 5px; font-size: 16px; }
+  ul { list-style: none; padding: 0; }
+  li { display: flex; align-items: center; margin-bottom: 5px; gap: 10px; }
+  li span { flex: 1; }
+  li button { padding: 2px 5px; }
+</style>
+</head>
+<body>
+
+<button id="addTaskBtn">Nouvelle tâche</button>
+<input type="text" id="newTaskInput" placeholder="Écris ta tâche ici...">
+<ul id="taskList"></ul>
 
 <script>
-function showApp1() {
-  document.getElementById('home').style.display = 'none';
-  document.getElementById('app1').style.display = 'block';
+const addTaskBtn = document.getElementById('addTaskBtn');
+const newTaskInput = document.getElementById('newTaskInput');
+const taskList = document.getElementById('taskList');
+
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+// Fonction pour sauvegarder dans localStorage
+function saveTasks() {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 }
-function showApp2() {
-  document.getElementById('home').style.display = 'none';
-  document.getElementById('app2').style.display = 'block';
+
+// Fonction pour créer un élément de tâche
+function createTaskElement(task) {
+  const li = document.createElement('li');
+
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.checked = task.completed;
+  checkbox.addEventListener('change', () => {
+    task.completed = checkbox.checked;
+    saveTasks();
+  });
+
+  const span = document.createElement('span');
+  span.textContent = task.text;
+
+  const editBtn = document.createElement('button');
+  editBtn.textContent = '✏️';
+  editBtn.addEventListener('click', () => {
+    const editText = prompt('Modifie la tâche:', span.textContent);
+    if (editText !== null && editText.trim() !== '') {
+      span.textContent = editText;
+      task.text = editText;
+      saveTasks();
+    }
+  });
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.textContent = '🗑️';
+  deleteBtn.addEventListener('click', () => {
+    tasks = tasks.filter(t => t !== task);
+    li.remove();
+    saveTasks();
+  });
+
+  li.appendChild(checkbox);
+  li.appendChild(span);
+  li.appendChild(editBtn);
+  li.appendChild(deleteBtn);
+
+  taskList.appendChild(li);
 }
-function returnHome() {
-  document.getElementById('home').style.display = 'block';
-  document.getElementById('app1').style.display = 'none';
-  document.getElementById('app2').style.display = 'none';
+
+// Vérifie si on doit supprimer les tâches cochées du jour précédent
+function cleanCheckedTasks() {
+  const lastCleanDate = localStorage.getItem('lastCleanDate');
+  const today = new Date().toDateString();
+  if (lastCleanDate !== today) {
+    tasks = tasks.filter(task => !task.completed);
+    saveTasks();
+    localStorage.setItem('lastCleanDate', today);
+  }
+}
+
+// Affichage des tâches existantes après nettoyage
+cleanCheckedTasks();
+tasks.forEach(task => createTaskElement(task));
+
+// Ajouter une nouvelle tâche
+addTaskBtn.addEventListener('click', () => {
+  newTaskInput.style.display = 'block';
+  newTaskInput.focus();
+});
+
+newTaskInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && newTaskInput.value.trim() !== '') {
+    const newTask = { text: newTaskInput.value, completed: false };
+    tasks.push(newTask);
+    createTaskElement(newTask);
+    saveTasks();
+    newTaskInput.value = '';
+    newTaskInput.style.display = 'none';
+  }
+});
+</script>
+
+</body>
+</html></div>
+<div id="app4" class="app"><button onclick="returnHome()">Retour</button><!-- Colle code app 4 --></div>
+<div id="app5" class="app"><button onclick="returnHome()">Retour</button><!-- Colle code app 5 --></div>
+<div id="app6" class="app"><button onclick="returnHome()">Retour</button><!-- Colle code app 6 --></div>
+<div id="app7" class="app"><button onclick="returnHome()">Retour</button><!-- Colle code app 7 --></div>
+<div id="app8" class="app"><button onclick="returnHome()">Retour</button><!-- Colle code app 8 --></div>
+<div id="app9" class="app"><button onclick="returnHome()">Retour</button><!-- Colle code app 9 --></div>
+<div id="app10" class="app"><button onclick="returnHome()">Retour</button><!-- Colle code app 10 --></div>
+<div id="app11" class="app"><button onclick="returnHome()">Retour</button><!-- Colle code app 11 --></div>
+<div id="app12" class="app"><button onclick="returnHome()">Retour</button><!-- Colle code app 12 --></div>
+
+<script>
+function showApp(num) {
+  document.getElementById('home').style.display = 'none';
+  for(let i=1;i<=12;i++){
+    document.getElementById('app'+i).style.display=(i===num)?'flex':'none';
+  }
+}
+function returnHome(){
+  document.getElementById('home').style.display='flex';
+  for(let i=1;i<=12;i++){
+    document.getElementById('app'+i).style.display='none';
+  }
 }
 </script>
+
 </body>
 </html>
